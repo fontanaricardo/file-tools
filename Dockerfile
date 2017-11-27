@@ -20,4 +20,4 @@ EXPOSE 80
 
 # Start the app
 WORKDIR /app/src/FileTools
-ENTRYPOINT dotnet ./bin/Release/netcoreapp2.0/publish/FileTools.dll
+ENTRYPOINT dotnet ./bin/Release/netcoreapp2.0/FileTools.dll
