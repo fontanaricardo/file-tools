@@ -1,0 +1,16 @@
+# https://docs.docker.com/compose/compose-file/
+# https://docs.docker.com/compose/production/
+
+version: '2'
+services:
+  identityserver_internal:
+    image: registry.pmjlle.joinville.sc.gov.br:5000/pmj/file-tools:${CI_BUILD_REF}
+    restart: "always"
+    ports:
+      - "20007:80"
+    environment:
+      - VIRTUAL_HOST
+      - VIRTUAL_PORT
+      - ASPNETCORE_ENVIRONMENT=Production
+    mem_limit: 1000M
+    memswap_limit: 1000M

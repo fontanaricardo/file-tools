@@ -1,0 +1,21 @@
+version: '2'
+services:
+  web:
+    image: file-tools:latest
+    container_name: dev-file-tools
+    network_mode: bridge
+    command: /bin/bash -e -c "cd /app/src/FileTools;
+      dotnet add package Microsoft.DotNet.Watcher.Tools --version 2.0.0 --no-restore;
+      dotnet restore --packages /opt/nuget -s https://api.nuget.org/v3/index.json -s http://pmj-webdev02/nuget/nuget FileTools.csproj;
+      dotnet watch run -p FileTools.csproj --no-restore --no-launch-profile"
+    ports:
+      - "30007:80"
+    volumes:
+      - $PWD:/app
+      - $PWD/data:/data
+      - /opt/nuget:/opt/nuget
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://*:80
+    mem_limit: 1000M
+    memswap_limit: 1000M
