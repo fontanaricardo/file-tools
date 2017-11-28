@@ -3,7 +3,7 @@
 
 version: '2'
 services:
-  identityserver_internal:
+  web:
     image: registry.pmjlle.joinville.sc.gov.br:5000/pmj/file-tools:${CI_BUILD_REF}
     restart: "always"
     ports:
