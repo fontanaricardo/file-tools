@@ -38,7 +38,8 @@ namespace FileTools
             {
                 c.SwaggerDoc("v1", new Info
                 { 
-                    Title = "Ferramentas para manipulação de arquivos"
+                    Title = "Ferramentas para manipulação de arquivos",
+                    Description = "ATENÇÃO: Para testar os arquivos processados, utilize um cliente REST como o Postman."
                 });
                 c.OperationFilter<AddFileUploadParams>();
 
