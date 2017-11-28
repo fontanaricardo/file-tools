@@ -13,8 +13,17 @@ namespace FileTools.Services
 {
     public class PdfService : IFileService
     {
+        private readonly ILogger _logger;
+
+        public PdfService(ILogger<PdfService> logger)
+        {
+            _logger = logger;
+        }
+
         public async Task<byte[]> ShrinkAsync(IShrinkable input)
         {
+            var startTime = DateTime.Now;
+
             var originalFilePath = Path.GetTempFileName();
             using(var stream = new FileStream(originalFilePath, FileMode.Create))
             {
@@ -31,6 +40,10 @@ namespace FileTools.Services
 
             File.Delete(originalFilePath);
             File.Delete(processedFilePath);
+
+            var elapsedTime = DateTime.Now.Subtract(startTime);
+
+            _logger.LogInformation($"File ${input.Content.FileName} shrinked in {elapsedTime.Seconds} seconds.");
 
             return processedFileBytes;
         }
