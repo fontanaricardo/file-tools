@@ -14,7 +14,7 @@ build_image:
   only:
     - master
   script:
-    - docker run --rm -v /opt/nuget:/opt/nuget -v $PWD:/app microsoft/dotnet:2.0.3-sdk /bin/bash -e -c "dotnet restore --packages /opt/nuget -s https://api.nuget.org/v3/index.json -s http://pmj-webdev02/nuget/nuget /app/src/FileTools/FileTools.csproj; dotnet publish --no-restore -c Release /app/src/FileTools/FileTools.csproj; chown -R $(id -u):$(id -g) /app;"
+    - docker run --rm -v /opt/nuget:/opt/nuget -v $PWD:/app microsoft/dotnet:2.0.3-sdk /bin/bash -e -c "dotnet restore --packages /opt/nuget -s https://api.nuget.org/v3/index.json -s http://pmj-webdev02/nuget/nuget; dotnet publish --no-restore -c Release -o publish; chown -R $(id -u):$(id -g) /app;"
     - /opt/ci/build
     - rm -rf bin obj
 

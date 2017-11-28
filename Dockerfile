@@ -19,5 +19,5 @@ RUN echo $TZ | tee /etc/timezone && dpkg-reconfigure --frontend noninteractive t
 EXPOSE 80
 
 # Start the app
-WORKDIR /app/src/FileTools
-ENTRYPOINT dotnet ./bin/Release/netcoreapp2.0/FileTools.dll
+WORKDIR /app/FileTools
+ENTRYPOINT dotnet ./publish/FileTools.dll
